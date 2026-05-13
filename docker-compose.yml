@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: shopsphere-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shopsphere_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - shopsphere-net
+
+  backend:
+    build: ./backend
+    container_name: shopsphere-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/shopsphere_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - shopsphere-net
+
+  frontend:
+    build: ./frontend
+    container_name: shopsphere-ui
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - shopsphere-net
+
+volumes:
+  mysql_data:
+
+networks:
+  shopsphere-net:
+    driver: bridge

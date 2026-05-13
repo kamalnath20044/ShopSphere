@@ -1,0 +1,43 @@
+.orders-page { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+.orders-page h1 { font-size: 1.8rem; margin-bottom: 32px; }
+
+.order-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  margin-bottom: 16px; overflow: hidden; transition: border-color 0.3s;
+}
+.order-card:hover { border-color: var(--accent); }
+
+.order-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; background: rgba(124,58,237,0.05); border-bottom: 1px solid var(--border);
+}
+.order-number { font-weight: 700; margin-right: 16px; }
+.order-date { font-size: 0.85rem; color: var(--text-muted); }
+.order-status {
+  display: flex; align-items: center; gap: 6px; padding: 4px 12px;
+  border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+}
+.status-pending { background: rgba(245,158,11,0.15); color: var(--warning); }
+.status-confirmed { background: rgba(59,130,246,0.15); color: #3b82f6; }
+.status-processing { background: rgba(124,58,237,0.15); color: var(--accent-light); }
+.status-shipped { background: rgba(59,130,246,0.15); color: #3b82f6; }
+.status-delivered { background: rgba(16,185,129,0.15); color: var(--success); }
+.status-cancelled { background: rgba(239,68,68,0.15); color: var(--danger); }
+
+.order-items { padding: 16px 20px; }
+.order-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+.order-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; }
+.order-item p { font-weight: 500; font-size: 0.9rem; }
+.order-item span { font-size: 0.8rem; color: var(--text-muted); }
+
+.order-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; border-top: 1px solid var(--border);
+}
+.order-total { font-weight: 700; font-size: 1.1rem; }
+.btn-cancel {
+  padding: 8px 16px; background: rgba(239,68,68,0.1); border: 1px solid var(--danger);
+  border-radius: var(--radius-sm); color: var(--danger); font-weight: 500; font-size: 0.85rem;
+  transition: all 0.3s;
+}
+.btn-cancel:hover { background: var(--danger); color: white; }
