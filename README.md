@@ -66,7 +66,6 @@ e-commerce project/
 ```sql
 CREATE DATABASE shopsphere_db;
 ```
-
 ### Backend Setup
 ```bash
 cd backend
