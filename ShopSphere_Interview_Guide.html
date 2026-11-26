@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ShopSphere - Interview Preparation Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; color: #1a1a2e; line-height: 1.7; padding: 40px; max-width: 900px; margin: 0 auto; font-size: 14px; }
+  @media print { body { padding: 20px; font-size: 11px; } h1 { font-size: 22px !important; } h2 { font-size: 16px !important; page-break-before: auto; } .no-break { page-break-inside: avoid; } }
+  h1 { font-size: 28px; text-align: center; color: #7c3aed; margin-bottom: 5px; }
+  .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 13px; }
+  h2 { font-size: 18px; color: #7c3aed; border-bottom: 2px solid #7c3aed; padding-bottom: 4px; margin: 30px 0 15px; }
+  h3 { font-size: 15px; color: #333; margin: 18px 0 8px; }
+  h4 { font-size: 13px; color: #555; margin: 12px 0 6px; }
+  p { margin-bottom: 10px; }
+  blockquote { background: #f3f0ff; border-left: 4px solid #7c3aed; padding: 12px 16px; margin: 10px 0; border-radius: 0 8px 8px 0; font-style: italic; color: #333; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 12.5px; }
+  th { background: #7c3aed; color: white; padding: 8px 10px; text-align: left; font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid #e5e5e5; }
+  tr:nth-child(even) { background: #faf8ff; }
+  code { background: #f0edff; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-family: 'Courier New', monospace; }
+  pre { background: #1a1a2e; color: #e0e0ff; padding: 14px; border-radius: 8px; overflow-x: auto; margin: 10px 0; font-size: 11.5px; line-height: 1.5; }
+  .qa { background: #fefefe; border: 1px solid #e8e5f0; border-radius: 8px; padding: 14px; margin: 10px 0; }
+  .qa strong { color: #7c3aed; }
+  ul, ol { margin: 8px 0 8px 20px; }
+  li { margin-bottom: 4px; }
+  .badge { display: inline-block; background: #7c3aed; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .section-note { background: #fffbeb; border: 1px solid #fbbf24; padding: 10px; border-radius: 8px; margin: 10px 0; font-size: 12px; }
+  hr { border: none; height: 1px; background: #e5e5e5; margin: 25px 0; }
+</style>
+</head>
+<body>
+
+<h1>🛒 ShopSphere</h1>
+<p class="subtitle">Complete Interview Preparation Guide — E-Commerce Management System<br>
+<strong>Tech Stack:</strong> Java 17 · Spring Boot 3.2 · React 18 · MySQL 8 · JWT · Docker<br>
+<strong>GitHub:</strong> github.com/kamalnath20044/ShopSphere</p>
+
+<hr>
+
+<h2>1. PROJECT OVERVIEW — "Tell me about your project"</h2>
+<blockquote>
+<strong>ShopSphere</strong> is a full-stack e-commerce management system that I built using <strong>Java Spring Boot</strong> for the backend, <strong>React.js</strong> for the frontend, and <strong>MySQL</strong> as the database. It simulates a real-world online shopping platform with features like JWT-based authentication, product catalog with search and filtering, shopping cart, order management, wishlist, payment integration, and an admin dashboard with sales analytics.<br><br>
+The backend follows a <strong>layered architecture</strong> (Controller → Service → Repository → Entity) and uses <strong>Spring Security with JWT tokens</strong> for stateless authentication. The frontend is a <strong>Single Page Application (SPA)</strong> built with React, using React Router for navigation and Axios for API communication.
+</blockquote>
+
+<h2>2. ARCHITECTURE</h2>
+<h3>High-Level Architecture</h3>
+<pre>
+┌────────────────────┐         ┌────────────────────────┐
+│   React Frontend   │  REST   │  Spring Boot Backend   │
+│   (Vite + React)   │◄──────►│  (Java 17 + Maven)     │
+│   Port: 5173       │  JSON   │  Port: 8080            │
+└────────────────────┘         └──────────┬─────────────┘
+                                          │ JPA / Hibernate
+                                          ▼
+                               ┌────────────────────────┐
+                               │       MySQL 8.x        │
+                               │    shopsphere_db       │
+                               └────────────────────────┘
+</pre>
+
+<h3>Backend Layered Architecture</h3>
+<pre>
+HTTP Request → Controller (receives & validates)
+                   → Service (business logic, @Transactional)
+                       → Repository (database operations via JPA)
+                           → Entity (JPA objects mapped to MySQL tables)
+</pre>
+
+<h2>3. TECHNOLOGY STACK</h2>
+<table>
+<tr><th>Technology</th><th>Purpose</th><th>Why I Chose It</th></tr>
+<tr><td><strong>Java 17</strong></td><td>Backend language</td><td>Industry standard, strong typing, LTS version</td></tr>
+<tr><td><strong>Spring Boot 3.2</strong></td><td>Backend framework</td><td>Auto-configuration, embedded Tomcat, rapid development</td></tr>
+<tr><td><strong>Spring Security</strong></td><td>Auth & authorization</td><td>Industry standard for securing Java applications</td></tr>
+<tr><td><strong>JWT</strong></td><td>Stateless authentication</td><td>Scalable, no server-side sessions, works with REST</td></tr>
+<tr><td><strong>Spring Data JPA</strong></td><td>Database access</td><td>Eliminates boilerplate SQL, repository pattern</td></tr>
+<tr><td><strong>Hibernate</strong></td><td>ORM framework</td><td>Maps Java objects to database tables automatically</td></tr>
+<tr><td><strong>MySQL 8.x</strong></td><td>Relational database</td><td>ACID compliance, strong for transactional data</td></tr>
+<tr><td><strong>React 18</strong></td><td>Frontend framework</td><td>Component-based, virtual DOM, huge ecosystem</td></tr>
+<tr><td><strong>Vite</strong></td><td>Build tool</td><td>Faster than Webpack, instant HMR</td></tr>
+<tr><td><strong>Axios</strong></td><td>HTTP client</td><td>Promise-based, interceptors for JWT</td></tr>
+<tr><td><strong>BCrypt</strong></td><td>Password hashing</td><td>One-way hash with salt, industry standard</td></tr>
+<tr><td><strong>Swagger/OpenAPI</strong></td><td>API documentation</td><td>Auto-generated interactive API docs</td></tr>
+<tr><td><strong>Docker</strong></td><td>Containerization</td><td>Consistent environments, easy deployment</td></tr>
+</table>
+
+<h2>4. DATABASE DESIGN (9 Tables)</h2>
+<table>
+<tr><th>Table</th><th>Key Columns</th><th>Relationships</th></tr>
+<tr><td><strong>users</strong></td><td>id, username, email, password(hashed), full_name</td><td>ManyToMany → roles</td></tr>
+<tr><td><strong>roles</strong></td><td>id, name (ROLE_USER, ROLE_ADMIN)</td><td>ManyToMany → users</td></tr>
+<tr><td><strong>categories</strong></td><td>id, name, description</td><td>OneToMany → products</td></tr>
+<tr><td><strong>products</strong></td><td>id, name, price, discount_price, stock, category_id</td><td>ManyToOne → category</td></tr>
+<tr><td><strong>cart_items</strong></td><td>id, user_id, product_id, quantity</td><td>ManyToOne → user &amp; product</td></tr>
+<tr><td><strong>orders</strong></td><td>id, order_number, user_id, total, status, shipping</td><td>OneToMany → order_items</td></tr>
+<tr><td><strong>order_items</strong></td><td>id, order_id, product_id, quantity, price</td><td>ManyToOne → order &amp; product</td></tr>
+<tr><td><strong>payments</strong></td><td>id, order_id, method, status, amount</td><td>OneToOne → order</td></tr>
+<tr><td><strong>wishlists</strong></td><td>id, user_id, product_id</td><td>ManyToOne → user &amp; product</td></tr>
+</table>
+
+<h2>5. CORE FEATURES</h2>
+
+<h3>5.1 JWT Authentication Flow</h3>
+<ol>
+<li><strong>Register:</strong> User submits credentials → password hashed with BCrypt → saved to DB</li>
+<li><strong>Login:</strong> Credentials validated → JWT token generated (HMAC-SHA, 24hr expiry) → returned to frontend</li>
+<li><strong>API Calls:</strong> Axios interceptor adds <code>Authorization: Bearer &lt;token&gt;</code> to every request</li>
+<li><strong>Server:</strong> JwtAuthenticationFilter validates token → sets SecurityContext → request proceeds</li>
+</ol>
+
+<h3>5.2 Role-Based Access Control</h3>
+<ul>
+<li><strong>ROLE_USER:</strong> Browse, cart, orders, wishlist</li>
+<li><strong>ROLE_ADMIN:</strong> Everything + manage products, all orders, analytics, user management</li>
+<li>Enforced at URL level (<code>SecurityConfig</code>) and method level (<code>@PreAuthorize</code>)</li>
+</ul>
+
+<h3>5.3 Product Management</h3>
+<ul>
+<li><strong>Pagination:</strong> <code>PageRequest.of(page, size, sort)</code> returns <code>Page&lt;Product&gt;</code></li>
+<li><strong>Search:</strong> JPQL query across name, description, brand</li>
+<li><strong>Filtering:</strong> By category ID</li>
+<li><strong>Soft Delete:</strong> Products deactivated, not deleted (preserves order history)</li>
+</ul>
+
+<h3>5.4 Order Processing Flow</h3>
+<pre>
+Cart Items → Validate Stock → Create Order → Create OrderItems
+→ Deduct Stock → Create Payment → Clear Cart → Return Order
+</pre>
+<ul>
+<li>Tax: 8% on subtotal | Shipping: Free over $100, else $9.99</li>
+<li>Status: PENDING → CONFIRMED → PROCESSING → SHIPPED → DELIVERED</li>
+<li>Cancel allowed only in PENDING/CONFIRMED (restores stock)</li>
+<li>All wrapped in <code>@Transactional</code> for atomicity</li>
+</ul>
+
+<h2>6. SECURITY MEASURES</h2>
+<table>
+<tr><th>Feature</th><th>Implementation</th></tr>
+<tr><td>Password Encryption</td><td>BCrypt (one-way hash with random salt)</td></tr>
+<tr><td>JWT Tokens</td><td>HMAC-SHA signed, 24-hour expiry</td></tr>
+<tr><td>CORS Protection</td><td>Only localhost:5173 allowed</td></tr>
+<tr><td>Input Validation</td><td>@Valid, @NotBlank, @Email, @Size annotations</td></tr>
+<tr><td>SQL Injection</td><td>JPA parameterized queries (never concatenates SQL)</td></tr>
+<tr><td>Stateless Sessions</td><td>SessionCreationPolicy.STATELESS</td></tr>
+<tr><td>Exception Handling</td><td>@RestControllerAdvice with uniform error responses</td></tr>
+</table>
+
+<h2>7. INTERVIEW QUESTIONS &amp; ANSWERS</h2>
+
+<div class="qa no-break">
+<strong>Q1: "Tell me about your project."</strong>
+<blockquote>"ShopSphere is a full-stack e-commerce platform I built using Spring Boot and React. It features JWT authentication with role-based access control, a product catalog with search and pagination, shopping cart, order management with status tracking, wishlist, and an admin dashboard with sales analytics. The backend follows a layered architecture with Spring Data JPA and MySQL. I also containerized it with Docker."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q2: "Why did you choose this tech stack?"</strong>
+<blockquote>"Spring Boot is the industry standard for Java enterprise apps — it provides auto-configuration and excellent security integration. React was chosen for its component-based architecture and virtual DOM performance. MySQL was selected because e-commerce data is highly relational — orders reference users and products, benefiting from ACID compliance. JWT enables stateless, scalable API security."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q3: "What was the most challenging part?"</strong>
+<blockquote>"The order processing flow — it involves validating stock for all cart items, creating the order and items, deducting inventory, creating payment records, and clearing the cart. I used @Transactional to ensure atomicity — if any step fails, the entire operation rolls back."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q4: "How do you handle errors?"</strong>
+<blockquote>"I implemented a global exception handler using @RestControllerAdvice. It catches ResourceNotFoundException (404), BadRequestException (400), BadCredentialsException (401), and validation errors (field-level messages). This ensures consistent error responses across all endpoints."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q5: "How does JWT work in your project?"</strong>
+<blockquote>"On login, the server generates a JWT signed with HMAC-SHA containing the username, with 24-hour expiry. The frontend stores it in localStorage. An Axios interceptor adds it to every request as a Bearer token. On the server, a OncePerRequestFilter validates the token's signature and expiry, loads the user, and sets the SecurityContext."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q6: "Authentication vs Authorization?"</strong>
+<blockquote>"Authentication verifies WHO you are (login → JWT). Authorization determines WHAT you can do (ROLE_USER can place orders, ROLE_ADMIN can also manage products). Authentication is handled by JWT, authorization by Spring Security's role-based access control."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q7: "Explain your database relationships."</strong>
+<blockquote>"Users ↔ Roles is ManyToMany. Products → Categories is ManyToOne. CartItems links Users and Products. Orders have OneToMany with OrderItems. OrderItems reference Products. Payments have OneToOne with Orders. Wishlists connect Users and Products with unique constraint."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q8: "How do you handle pagination?"</strong>
+<blockquote>"Using Spring Data JPA's Pageable. The controller accepts page, size, sortBy parameters. I create PageRequest.of(page, size, Sort) and pass it to the repository. The response includes content, totalPages, totalElements — the frontend renders pagination controls from this metadata."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q9: "What is @Transactional?"</strong>
+<blockquote>"@Transactional ensures a method runs in a database transaction. If any exception occurs, all changes roll back. Critical for order processing — if stock deduction fails, the partially created order is rolled back."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q10: "Difference between @Controller and @RestController?"</strong>
+<blockquote>"@Controller returns view names (for server-rendered pages). @RestController = @Controller + @ResponseBody — returns JSON directly. Since I'm building a REST API for a React frontend, I use @RestController."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q11: "How did you implement protected routes in React?"</strong>
+<blockquote>"I created a ProtectedRoute component that checks AuthContext. If not authenticated, it redirects to /login using Navigate. For admin routes, it checks ROLE_ADMIN. This wraps protected pages in the route configuration."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q12: "What design patterns did you use?"</strong>
+<blockquote>"Repository Pattern (JPA repos), DTO Pattern (request/response objects), Singleton Pattern (Spring beans), Filter Chain (JWT filter), Builder Pattern (JWT construction)."</blockquote>
+</div>
+
+<div class="qa no-break">
+<strong>Q13: "How would you scale this application?"</strong>
+<blockquote>"JWT is stateless, so multiple backend instances can run behind a load balancer. Database can use read replicas. Redis caching for product listings. Docker supports horizontal scaling. Frontend SPA can be served from a CDN."</blockquote>
+</div>
+
+<h2>8. API ENDPOINTS</h2>
+<table>
+<tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Purpose</th></tr>
+<tr><td>POST</td><td>/api/auth/register</td><td>None</td><td>Register user</td></tr>
+<tr><td>POST</td><td>/api/auth/login</td><td>None</td><td>Login, get JWT</td></tr>
+<tr><td>GET</td><td>/api/products</td><td>None</td><td>List products (paginated)</td></tr>
+<tr><td>GET</td><td>/api/products/{id}</td><td>None</td><td>Product details</td></tr>
+<tr><td>GET</td><td>/api/products/search</td><td>None</td><td>Search products</td></tr>
+<tr><td>GET</td><td>/api/products/featured</td><td>None</td><td>Featured products</td></tr>
+<tr><td>GET</td><td>/api/categories</td><td>None</td><td>All categories</td></tr>
+<tr><td>GET</td><td>/api/cart</td><td>User</td><td>Get cart items</td></tr>
+<tr><td>POST</td><td>/api/cart/add</td><td>User</td><td>Add to cart</td></tr>
+<tr><td>POST</td><td>/api/orders</td><td>User</td><td>Place order</td></tr>
+<tr><td>GET</td><td>/api/orders</td><td>User</td><td>Order history</td></tr>
+<tr><td>GET</td><td>/api/wishlist</td><td>User</td><td>Get wishlist</td></tr>
+<tr><td>GET</td><td>/api/admin/dashboard</td><td>Admin</td><td>Dashboard stats</td></tr>
+<tr><td>PUT</td><td>/api/admin/orders/{id}/status</td><td>Admin</td><td>Update order</td></tr>
+</table>
+
+<h2>9. KEY TERMS — Quick Revision</h2>
+<table>
+<tr><th>Term</th><th>Meaning</th></tr>
+<tr><td><strong>REST API</strong></td><td>Stateless HTTP interface using GET/POST/PUT/DELETE with JSON</td></tr>
+<tr><td><strong>JWT</strong></td><td>Encoded token with user info, signed with secret key</td></tr>
+<tr><td><strong>BCrypt</strong></td><td>Password hashing with random salt</td></tr>
+<tr><td><strong>JPA</strong></td><td>Java Persistence API — standard for ORM in Java</td></tr>
+<tr><td><strong>Hibernate</strong></td><td>JPA implementation mapping objects to tables</td></tr>
+<tr><td><strong>CORS</strong></td><td>Cross-Origin Resource Sharing — allows different-port frontend</td></tr>
+<tr><td><strong>SPA</strong></td><td>Single Page App — one HTML page, JS handles routing</td></tr>
+<tr><td><strong>Virtual DOM</strong></td><td>React's in-memory DOM for efficient updates</td></tr>
+<tr><td><strong>@Transactional</strong></td><td>All DB operations succeed or all rollback</td></tr>
+<tr><td><strong>Pagination</strong></td><td>Loading data in chunks instead of all at once</td></tr>
+</table>
+
+<h2>10. RESUME BULLET POINTS</h2>
+<div class="section-note">
+<strong>ShopSphere — E-Commerce Management System</strong> | Java, Spring Boot, React, MySQL<br>
+• Developed a full-stack e-commerce platform with JWT authentication, RBAC, and RESTful APIs<br>
+• Implemented product catalog with search, pagination, and sorting using Spring Data JPA<br>
+• Built shopping cart, order management, payment integration, and admin analytics dashboard<br>
+• Designed 9 database tables with JPA entity relationships and Hibernate ORM<br>
+• Containerized with Docker; documented APIs using Swagger/OpenAPI<br>
+• GitHub: github.com/kamalnath20044/ShopSphere
+</div>
+
+<hr>
+<p style="text-align:center; color:#888; font-size:11px; margin-top:20px;">ShopSphere Interview Guide — Prepared May 2026</p>
+
+</body>
+</html>
